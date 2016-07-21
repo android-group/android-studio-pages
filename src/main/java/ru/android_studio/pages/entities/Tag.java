@@ -1,4 +1,4 @@
-package ru.android_studio.pages;
+package ru.android_studio.pages.entities;
 
 import java.io.Serializable;
 
