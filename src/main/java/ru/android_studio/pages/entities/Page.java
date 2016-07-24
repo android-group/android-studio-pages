@@ -1,37 +1,58 @@
 package ru.android_studio.pages.entities;
 
-//import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * Created by TarCV on 17.07.2016.
  */
 @Entity
-@Table(name="page")
+@Table(name="pages")
 public class Page implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
-    //@NotEmpty private Author author;
+    @ManyToOne
+    @NotNull
+    private Author author;
 
-//    @NotEmpty
-    @Size(min=4, max=20)
+    @NotEmpty
+    @Size(min=4, max=30)
     private String title;
 
-//    @NotEmpty
+    @NotEmpty
     private String content;
-//    private Set<Tag> tags;
 
+    @NotEmpty
+    @ManyToMany
+    private Set<Tag> tags;
 
-    public long getId() {
+    @NotNull
+    @ManyToOne
+    private Category category;
+
+    private Page() {
+    }
+
+    public Page(String title, Author author, String content, Set<Tag> tags, Category category) {
+        this.title = title;
+        this.author = author;
+        this.content = content;
+        this.tags = tags;
+        this.category = category;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -49,5 +70,21 @@ public class Page implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
     }
 }

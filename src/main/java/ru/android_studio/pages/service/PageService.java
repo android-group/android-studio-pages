@@ -5,5 +5,5 @@ import ru.android_studio.pages.entities.Page;
 import java.util.List;
 
 public interface PageService {
-    List<Page> findById(int id);
+    Page findById(Long id);
 }

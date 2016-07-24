@@ -19,7 +19,7 @@ public class PageServiceImpl implements PageService {
         return pageRepository.save(page);
     }
 
-    public List<Page> findById(int id) {
+    public Page findById(Long id) {
         return pageRepository.findById(id);
     }
 }
