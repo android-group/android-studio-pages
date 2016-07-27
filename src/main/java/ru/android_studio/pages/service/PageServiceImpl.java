@@ -6,7 +6,6 @@ import ru.android_studio.pages.entities.Page;
 import ru.android_studio.pages.repository.PageRepository;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Service("pageService")
 public class PageServiceImpl implements PageService {

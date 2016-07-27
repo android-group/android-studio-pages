@@ -6,21 +6,21 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 
 /**
- *  Internationalization messages configuration.
+ * Internationalization messages configuration.
  */
 @Configuration
 public class MessagesConfig {
-    
+
     private static final String MESSAGES_BASENAME = "locale";
 
     /**
      * Message externalization/internationalization.
      */
     @Bean
-	public MessageSource messageSource() {
+    public MessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
         messageSource.setBasename(MESSAGES_BASENAME);
         messageSource.setDefaultEncoding("UTF-8");
-		return messageSource;
+        return messageSource;
     }
 }

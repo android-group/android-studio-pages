@@ -13,7 +13,7 @@ public class PageController {
     @Autowired
     PageService pageService;
 
-    @RequestMapping(value="page/{id}", method = RequestMethod.GET, produces="application/json")
+    @RequestMapping(value = "page/{id}", method = RequestMethod.GET, produces = "application/json")
     public Page pageById(@PathVariable Long id) {
         Page page = pageService.findById(id);
         if (page != null) {

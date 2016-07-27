@@ -12,7 +12,7 @@ import java.util.Set;
  * Created by TarCV on 17.07.2016.
  */
 @Entity
-@Table(name="pages")
+@Table(name = "pages")
 public class Page implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,7 @@ public class Page implements Serializable {
     private Author author;
 
     @NotEmpty
-    @Size(min=4, max=30)
+    @Size(min = 4, max = 30)
     private String title;
 
     @NotEmpty
