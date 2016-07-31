@@ -11,7 +11,7 @@ import java.util.Set;
  * Created by TarCV on 17.07.2016.
  */
 @Entity
-@Table(name="tags")
+@Table(name = "tags")
 public class Tag implements Serializable {
     private Long id;
 

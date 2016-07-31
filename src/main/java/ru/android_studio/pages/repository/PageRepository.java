@@ -3,8 +3,8 @@ package ru.android_studio.pages.repository;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
 import ru.android_studio.pages.entities.Page;
 import ru.android_studio.pages.entities.PageInfo;
 

@@ -5,7 +5,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
-@Table(name="categories")
+@Table(name = "categories")
 public class Category implements Serializable {
     private Long id;
 
@@ -28,7 +28,7 @@ public class Category implements Serializable {
         this.id = id;
     }
 
-    @Size(min=4, max=20)
+    @Size(min = 4, max = 20)
     public String getName() {
         return name;
     }

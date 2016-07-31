@@ -20,15 +20,19 @@ import java.util.stream.Stream;
 
 
 @SpringBootApplication
-public class Application {
+public class Main {
 
-	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(Main.class, args);
+    }
 
-	@Bean
-	CommandLineRunner init(
-	        PageRepository pageRepository,
+    private static <T> Set<T> createSet(T... tags) {
+        return new HashSet<>(Arrays.asList(tags));
+    }
+
+    @Bean
+    CommandLineRunner init(
+            PageRepository pageRepository,
             AuthorRepository authorRepository,
             CategoryRepository categoryRepository,
             TagRepository tagRepository
@@ -48,15 +52,12 @@ public class Application {
                     .map(number -> categoryRepository.save(new Category("Category" + number)))
                     .toArray(Category[]::new);
 
-            Stream.of(new Page[] {
-                new Page("Author0 Tag0,Tag1 Cat0", authors[0], createSet(tags[0], tags[1]), categories[0], "Content"),
-                new Page("Author0 Tag0 Cat0", authors[0], createSet(tags[0]), categories[0], "Content"),
-                new Page("Author0 Tag1 Cat1", authors[0], createSet(tags[1]), categories[1], "Content"),
-            }).forEach(pageRepository::save);
-        };
-	}
+            final String content = "Content";
+            Page page = new Page("Author0 Tag0,Tag1 Cat0", authors[0], createSet(tags[0], tags[1]), categories[0], content);
+            Page page1 = new Page("Author0 Tag0 Cat0", authors[0], createSet(tags[0]), categories[0], content);
+            Page page3 = new Page("Author0 Tag1 Cat1", authors[0], createSet(tags[1]), categories[1], content);
 
-    private static <T> Set<T> createSet(T... tags) {
-        return new HashSet<>(Arrays.asList(tags));
+            Stream.of(new Page[]{page, page1, page3,}).forEach(pageRepository::save);
+        };
     }
 }

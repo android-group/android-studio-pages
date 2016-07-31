@@ -10,6 +10,7 @@ import java.util.Set;
  * Created by TarCV on 17.07.2016.
  */
 @Entity
+@Table(name = "pages")
 @NamedEntityGraph(name = "Page.detail",
         attributeNodes = {
                 @NamedAttributeNode("author"),
@@ -17,8 +18,13 @@ import java.util.Set;
                 @NamedAttributeNode("tags")
         }
 )
-@Table(name="pages")
 public class Page extends PageInfo implements Serializable {
+    private Long id;
+
+    private Author author;
+
+    private String title;
+
     private String content;
 
     public Page() {
