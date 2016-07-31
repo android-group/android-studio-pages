@@ -5,9 +5,13 @@ import org.springframework.stereotype.Repository;
 import ru.android_studio.pages.entities.Page;
 import ru.android_studio.pages.entities.Tag;
 
+import java.util.List;
+
 public interface TagRepository extends JpaRepository<Tag, Long> {
     Tag findById(long id);
     Tag findByName(String name);
 
     Tag save(Tag page);
+
+    List<Tag> findByPagesCategoryId(Long id);
 }

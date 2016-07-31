@@ -1,5 +1,6 @@
 package ru.android_studio.pages.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -15,6 +16,8 @@ public class Tag implements Serializable {
     private Long id;
 
     private String name;
+
+    private Set<Page> pages;
 
     private Tag() {
     }
@@ -40,5 +43,15 @@ public class Tag implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @ManyToMany(mappedBy = "tags", fetch = FetchType.LAZY)
+    @JsonIgnore
+    public Set<Page> getPages() {
+        return pages;
+    }
+
+    public void setPages(Set<Page> pages) {
+        this.pages = pages;
     }
 }

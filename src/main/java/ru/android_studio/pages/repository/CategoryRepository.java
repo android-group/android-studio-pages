@@ -7,7 +7,6 @@ import ru.android_studio.pages.entities.Page;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> {
     Category findById(long id);
-    Category findByName(String name);
 
     Category save(Category page);
 }

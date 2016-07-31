@@ -2,11 +2,8 @@ package ru.android_studio.pages;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import ru.android_studio.pages.entities.Author;
 import ru.android_studio.pages.entities.Category;
 import ru.android_studio.pages.entities.Page;
@@ -52,9 +49,9 @@ public class Application {
                     .toArray(Category[]::new);
 
             Stream.of(new Page[] {
-                new Page("Author0 Tag0,Tag1 Cat0", authors[0], "Content", createSet(tags[0], tags[1]), categories[0]),
-                new Page("Author0 Tag0 Cat0", authors[0], "Content", createSet(tags[0]), categories[0]),
-                new Page("Author0 Tag1 Cat1", authors[0], "Content", createSet(tags[1]), categories[1]),
+                new Page("Author0 Tag0,Tag1 Cat0", authors[0], createSet(tags[0], tags[1]), categories[0], "Content"),
+                new Page("Author0 Tag0 Cat0", authors[0], createSet(tags[0]), categories[0], "Content"),
+                new Page("Author0 Tag1 Cat1", authors[0], createSet(tags[1]), categories[1], "Content"),
             }).forEach(pageRepository::save);
         };
 	}
