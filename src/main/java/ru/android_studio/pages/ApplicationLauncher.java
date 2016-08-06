@@ -20,10 +20,10 @@ import java.util.stream.Stream;
 
 
 @SpringBootApplication
-public class Main {
+public class ApplicationLauncher {
 
     public static void main(String[] args) {
-        SpringApplication.run(Main.class, args);
+        SpringApplication.run(ApplicationLauncher.class, args);
     }
 
     private static <T> Set<T> createSet(T... tags) {
@@ -35,8 +35,8 @@ public class Main {
             PageRepository pageRepository,
             AuthorRepository authorRepository,
             CategoryRepository categoryRepository,
-            TagRepository tagRepository
-    ) {
+            TagRepository tagRepository) {
+
         return args -> {
             String[] stringNumbers = {"0", "1", "2"};
 
