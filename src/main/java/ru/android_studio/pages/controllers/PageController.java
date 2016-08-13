@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ru.android_studio.pages.entities.Page;
 import ru.android_studio.pages.service.PageService;
@@ -17,7 +16,7 @@ public class PageController {
     @Autowired
     PageService pageService;
 
-    @RequestMapping(value="page", method = RequestMethod.GET, produces="application/json")
+    @RequestMapping(value="page")
     public Page page(@Nullable Long id) {
         Page page = pageService.findById(id);
         if (page != null) {
@@ -27,7 +26,7 @@ public class PageController {
         }
     }
 
-    @RequestMapping(value="pages", method = RequestMethod.GET, produces="application/json")
+    @RequestMapping(value="pages")
     @JsonView(PageView.InfoOnly.class)
     public List<Page> pages(@Nullable Long category, @Nullable String tags) {
         String[] namesAsArray = (tags == null) ? null : tags.split(",");
