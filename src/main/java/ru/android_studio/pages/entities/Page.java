@@ -3,6 +3,8 @@ package ru.android_studio.pages.entities;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -18,21 +20,28 @@ import java.util.Set;
                 @NamedAttributeNode("tags")
         }
 )
-public class Page extends PageInfo implements Serializable {
+public class Page implements Serializable {
     private Long id;
+
+    private String content;
 
     private Author author;
 
     private String title;
 
-    private String content;
+    private Set<Tag> tags;
+
+    private Category category;
 
     public Page() {
 
     }
 
     public Page(String title, Author author, Set<Tag> tags, Category category, String content) {
-        super(title, author, tags, category);
+        this.author = author;
+        this.title = title;
+        this.tags = tags;
+        this.category = category;
         this.content = content;
     }
 
@@ -47,4 +56,53 @@ public class Page extends PageInfo implements Serializable {
         this.content = content;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @NotEmpty
+    @Size(min=4, max=30)
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @ManyToOne
+    @NotNull
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    @NotEmpty
+    @ManyToMany
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
+    }
+
+    @NotNull
+    @ManyToOne
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 }

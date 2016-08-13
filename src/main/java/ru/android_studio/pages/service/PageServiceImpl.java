@@ -3,7 +3,6 @@ package ru.android_studio.pages.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.android_studio.pages.entities.Page;
-import ru.android_studio.pages.entities.PageInfo;
 import ru.android_studio.pages.repository.PageRepository;
 
 import javax.transaction.Transactional;
@@ -25,17 +24,22 @@ public class PageServiceImpl implements PageService {
     }
 
     @Override
-    public List<PageInfo> findByCategoryId(Long id) {
+    public List<Page> findByCategoryId(Long id) {
         return pageRepository.findByCategoryId(id);
     }
 
     @Override
-    public List<PageInfo> findByTagNames(String[] names) {
-        return pageRepository.findByTagsNameIn(new HashSet<>(Arrays.asList(names)));
+    public List<Page> findByTagNames(List<String> names) {
+        return pageRepository.findByTagsNameIn(names);
     }
 
     @Override
-    public List<PageInfo> findByCategoryAndTagNames(long category, String[] namesAsArray) {
-        return pageRepository.findByCategoryIdAndTagsNameIn(category, new HashSet<>(Arrays.asList(namesAsArray)));
+    public List<Page> findByCategoryAndTagNames(long category, List<String> tagNames) {
+        return pageRepository.findByCategoryIdAndTagsNameIn(category, tagNames);
+    }
+
+    @Override
+    public List<Page> findAll() {
+        return pageRepository.findAll();
     }
 }
