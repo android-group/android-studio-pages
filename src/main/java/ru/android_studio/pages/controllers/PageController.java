@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.android_studio.pages.entities.Page;
 import ru.android_studio.pages.service.PageService;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -29,16 +30,24 @@ public class PageController {
     @RequestMapping(value="pages")
     @JsonView(PageView.InfoOnly.class)
     public List<Page> pages(@Nullable Long category, @Nullable String tags) {
-        String[] namesAsArray = (tags == null) ? null : tags.split(",");
         if (category == null && tags == null) {
             return pageService.findAll();
         } else if (category == null) {
-                return pageService.findByTagNames(Arrays.asList(namesAsArray));
-        } else if (namesAsArray == null) {
+            ArrayList<String> namesAsArray = commaSeparatedToList(tags);
+            return pageService.findByTagNames(namesAsArray);
+        } else if (tags == null) {
             return pageService.findByCategoryId(category);
         } else {
-            return pageService.findByCategoryAndTagNames(category, Arrays.asList(namesAsArray));
+            ArrayList<String> namesAsArray = commaSeparatedToList(tags);
+            return pageService.findByCategoryAndTagNames(category, namesAsArray);
         }
+    }
+
+    private static ArrayList<String> commaSeparatedToList(String tags) {
+        String[] tagsAsArray = tags.split(",");
+        ArrayList<String> list = new ArrayList<>(tagsAsArray.length);
+        Collections.addAll(list, tags);
+        return list;
     }
 
 }

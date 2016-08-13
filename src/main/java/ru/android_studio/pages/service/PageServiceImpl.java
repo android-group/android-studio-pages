@@ -29,12 +29,12 @@ public class PageServiceImpl implements PageService {
     }
 
     @Override
-    public List<Page> findByTagNames(List<String> names) {
+    public List<Page> findByTagNames(ArrayList<String> names) {
         return pageRepository.findByTagsNameIn(names);
     }
 
     @Override
-    public List<Page> findByCategoryAndTagNames(long category, List<String> tagNames) {
+    public List<Page> findByCategoryAndTagNames(long category, ArrayList<String> tagNames) {
         return pageRepository.findByCategoryIdAndTagsNameIn(category, tagNames);
     }
 

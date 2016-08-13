@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import ru.android_studio.pages.entities.Page;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface PageRepository extends JpaRepository<Page, Long> {
@@ -19,8 +20,8 @@ public interface PageRepository extends JpaRepository<Page, Long> {
     List<Page> findByCategoryId(Long id);
 
     @EntityGraph(value = "Page.detail", type = EntityGraph.EntityGraphType.LOAD)
-    List<Page> findByTagsNameIn(List<String> names);
+    List<Page> findByTagsNameIn(ArrayList<String> names);
 
     @EntityGraph(value = "Page.detail", type = EntityGraph.EntityGraphType.LOAD)
-    List<Page> findByCategoryIdAndTagsNameIn(Long category, List<String> strings);
+    List<Page> findByCategoryIdAndTagsNameIn(Long category, ArrayList<String> strings);
 }
