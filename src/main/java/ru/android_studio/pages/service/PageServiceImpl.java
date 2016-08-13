@@ -31,11 +31,11 @@ public class PageServiceImpl implements PageService {
 
     @Override
     public List<PageInfo> findByTagNames(String[] names) {
-        return pageRepository.findByTagsNameIn(new HashSet<String>(Arrays.asList(names)));
+        return pageRepository.findByTagsNameIn(new HashSet<>(Arrays.asList(names)));
     }
 
     @Override
     public List<PageInfo> findByCategoryAndTagNames(long category, String[] namesAsArray) {
-        return pageRepository.findByCategoryIdAndTagsNameIn(category, new HashSet<String>(Arrays.asList(namesAsArray)));
+        return pageRepository.findByCategoryIdAndTagsNameIn(category, new HashSet<>(Arrays.asList(namesAsArray)));
     }
 }
