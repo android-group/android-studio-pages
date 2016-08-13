@@ -1,12 +1,12 @@
 package ru.android_studio.pages.service;
 
 import ru.android_studio.pages.entities.Category;
-import ru.android_studio.pages.entities.Tag;
 
 import java.util.List;
+import java.util.Set;
 
 public interface CategoryService {
     List<Category> findAll();
 
-    List<Tag> findAllTags(Long id);
+    Set<String> findAllTags(Long id);
 }

@@ -9,6 +9,8 @@ import ru.android_studio.pages.repository.TagRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service("categoryService")
 public class CategoryServiceImpl implements CategoryService {
@@ -30,7 +32,9 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Tag> findAllTags(Long id) {
-        return tagRepository.findByPagesCategoryId(id);
+    public Set<String> findAllTags(Long id) {
+        return tagRepository.findByPagesCategoryId(id).stream()
+                .map(Tag::getName)
+                .collect(Collectors.toSet());
     }
 }
