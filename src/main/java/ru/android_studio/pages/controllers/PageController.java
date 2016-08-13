@@ -1,5 +1,6 @@
 package ru.android_studio.pages.controllers;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,7 @@ public class PageController {
     }
 
     @RequestMapping(value="pages", method = RequestMethod.GET, produces="application/json")
+    @JsonView(PageView.InfoOnly.class)
     public List<Page> pages(@Nullable Long category, @Nullable String tags) {
         String[] namesAsArray = (tags == null) ? null : tags.split(",");
         if (category == null && tags == null) {

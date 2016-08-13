@@ -1,6 +1,8 @@
 package ru.android_studio.pages.entities;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.validator.constraints.NotEmpty;
+import ru.android_studio.pages.controllers.PageView;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -58,6 +60,7 @@ public class Page implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView(PageView.InfoOnly.class)
     public Long getId() {
         return id;
     }
@@ -68,6 +71,7 @@ public class Page implements Serializable {
 
     @NotEmpty
     @Size(min=4, max=30)
+    @JsonView(PageView.InfoOnly.class)
     public String getTitle() {
         return title;
     }
@@ -78,6 +82,7 @@ public class Page implements Serializable {
 
     @ManyToOne
     @NotNull
+    @JsonView(PageView.InfoOnly.class)
     public Author getAuthor() {
         return author;
     }
@@ -88,6 +93,7 @@ public class Page implements Serializable {
 
     @NotEmpty
     @ManyToMany
+    @JsonView(PageView.InfoOnly.class)
     public Set<Tag> getTags() {
         return tags;
     }
@@ -98,6 +104,7 @@ public class Page implements Serializable {
 
     @NotNull
     @ManyToOne
+    @JsonView(PageView.InfoOnly.class)
     public Category getCategory() {
         return category;
     }
