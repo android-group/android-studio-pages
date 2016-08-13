@@ -1,5 +1,6 @@
 package ru.android_studio.pages.controllers;
 
+import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,7 +17,16 @@ public class PageController {
     PageService pageService;
 
     @RequestMapping(value="page", method = RequestMethod.GET, produces="application/json")
-    public Page pageById(Long id) {
+    public Page page(@Nullable Long id) {
+        return pageById(id);
+    }
+
+    @RequestMapping(value="pages", method = RequestMethod.GET, produces="application/json")
+    public List<PageInfo> pages(@Nullable Long category, @Nullable String tags) {
+        return pagesByTag(category, tags);
+    }
+
+    private Page pageById(@Nullable Long id) {
         Page page = pageService.findById(id);
         if (page != null) {
             return page;
@@ -25,8 +35,7 @@ public class PageController {
         }
     }
 
-    @RequestMapping(value="pagesBy", method = RequestMethod.GET, produces="application/json")
-    public List<PageInfo> pagesByTag(Long category, String tags) {
+    private List<PageInfo> pagesByTag(@Nullable Long category, @Nullable String tags) {
         String[] namesAsArray = (tags == null) ? null : tags.split(",");
         if (category == null) {
             return pageService.findByTagNames(namesAsArray);
