@@ -48,7 +48,7 @@ public class Page implements Serializable {
     }
 
     @NotEmpty
-//    @Lob
+    @Lob
     @Basic(fetch = FetchType.LAZY)
     public String getContent() {
         return content;
