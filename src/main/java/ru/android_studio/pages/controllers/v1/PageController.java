@@ -1,10 +1,13 @@
-package ru.android_studio.pages.controllers;
+package ru.android_studio.pages.controllers.v1;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import ru.android_studio.pages.controllers.PageView;
 import ru.android_studio.pages.entities.Page;
 import ru.android_studio.pages.service.PageService;
 
@@ -17,7 +20,7 @@ public class PageController {
     @Autowired
     PageService pageService;
 
-    @RequestMapping(value="page")
+    @RequestMapping(value="v1/page")
     public Page page(@Nullable Long id) {
         Page page = pageService.findById(id);
         if (page != null) {
@@ -27,7 +30,7 @@ public class PageController {
         }
     }
 
-    @RequestMapping(value="pages")
+    @RequestMapping(value="v1/pages")
     @JsonView(PageView.InfoOnly.class)
     public List<Page> pages(@Nullable Long category, @Nullable String tags) {
         if (category == null && tags == null) {
@@ -50,4 +53,10 @@ public class PageController {
         return list;
     }
 
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    static class EntityNotFoundException extends RuntimeException {
+        EntityNotFoundException(String message) {
+            super(message);
+        }
+    }
 }

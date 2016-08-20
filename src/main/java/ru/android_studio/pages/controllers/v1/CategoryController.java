@@ -1,4 +1,4 @@
-package ru.android_studio.pages.controllers;
+package ru.android_studio.pages.controllers.v1;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,12 +14,12 @@ public class CategoryController {
     @Autowired
     CategoryService categoryService;
 
-    @RequestMapping(value="categories")
+    @RequestMapping(value="v1/categories")
     public List<Category> categories() {
         return categoryService.findAll();
     }
 
-    @RequestMapping(value="categoryTags")
+    @RequestMapping(value="v1/categoryTags")
     public Set<String> categories(Long id) {
         return categoryService.findAllTags(id);
     }
