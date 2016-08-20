@@ -20,7 +20,7 @@ public class PageController {
     @Autowired
     PageService pageService;
 
-    @RequestMapping(value="v1/page")
+    @RequestMapping(value="api/v1/page")
     public Page page(@Nullable Long id) {
         Page page = pageService.findById(id);
         if (page != null) {
@@ -30,7 +30,7 @@ public class PageController {
         }
     }
 
-    @RequestMapping(value="v1/pages")
+    @RequestMapping(value="api/v1/pages")
     @JsonView(PageView.InfoOnly.class)
     public List<Page> pages(@Nullable Long category, @Nullable String tags) {
         if (category == null && tags == null) {

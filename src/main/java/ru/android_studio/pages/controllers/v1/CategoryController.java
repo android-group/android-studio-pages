@@ -14,12 +14,12 @@ public class CategoryController {
     @Autowired
     CategoryService categoryService;
 
-    @RequestMapping(value="v1/categories")
+    @RequestMapping(value="api/v1/categories")
     public List<Category> categories() {
         return categoryService.findAll();
     }
 
-    @RequestMapping(value="v1/categoryTags")
+    @RequestMapping(value="api/v1/categoryTags")
     public Set<String> categories(Long id) {
         return categoryService.findAllTags(id);
     }
