@@ -4,6 +4,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
 import ru.android_studio.pages.entities.Author;
 import ru.android_studio.pages.entities.Category;
 import ru.android_studio.pages.entities.Page;
@@ -20,6 +23,8 @@ import java.util.stream.Stream;
 
 
 @SpringBootApplication
+@EnableJpaRepositories("ru.android_studio.pages.repository")
+@EnableElasticsearchRepositories("ru.android_studio.pages.elasticsearch")
 public class ApplicationLauncher {
 
     public static void main(String[] args) {

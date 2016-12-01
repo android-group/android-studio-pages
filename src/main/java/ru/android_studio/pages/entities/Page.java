@@ -2,6 +2,8 @@ package ru.android_studio.pages.entities;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.data.elasticsearch.annotations.Document;
+
 import ru.android_studio.pages.controllers.PageView;
 
 import javax.persistence.*;

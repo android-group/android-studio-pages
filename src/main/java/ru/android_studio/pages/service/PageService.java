@@ -15,4 +15,6 @@ public interface PageService {
     List<Page> findByCategoryAndTagNames(long category, ArrayList<String> tagNames);
 
     List<Page> findAll();
+
+	List<Page> findByContentLike(String content);
 }

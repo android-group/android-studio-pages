@@ -2,6 +2,8 @@ package ru.android_studio.pages.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import ru.android_studio.pages.elasticsearch.ElasticPageRepository;
 import ru.android_studio.pages.entities.Page;
 import ru.android_studio.pages.repository.PageRepository;
 
@@ -14,6 +16,9 @@ public class PageServiceImpl implements PageService {
     @Autowired
     private PageRepository pageRepository;
 
+    @Autowired
+    private ElasticPageRepository elasticPageRepository;
+    
     @Transactional
     public Page save(Page page) {
         return pageRepository.save(page);
@@ -41,5 +46,10 @@ public class PageServiceImpl implements PageService {
     @Override
     public List<Page> findAll() {
         return pageRepository.findAll();
+    }
+
+    @Override
+    public List<Page> findByContentLike(String content) {
+    	return elasticPageRepository.findByContentLike(content);
     }
 }
